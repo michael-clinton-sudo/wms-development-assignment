@@ -1,17 +1,42 @@
-
 <!DOCTYPE html>
 <html>
-<head><title>Inventory Upload</title></head>
+<head>
+    <title>Inventory Upload</title>
+    <style>
+        .data {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .data th, .data td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        .data th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
 <body>
     <h2>Upload Excel/CSV</h2>
     <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
+        <input type="file" name="file" required>
         <input type="submit" value="Upload + Process">
     </form>
-    {% if tables %}
-        <h3>Cleaned Data Preview</h3>
-        {{ tables|safe }}
-        <a href="/download/result.csv">Download Cleaned CSV</a>
+
+    <br><br>
+    <h2>Ask a Question About the Data</h2>
+    <form method="post" action="/query">
+        <input type="text" name="query" placeholder="e.g. total quantity, show TLCQ" required>
+        <input type="submit" value="Ask">
+    </form>
+
+    {% if table %}
+        <h3>Data Preview</h3>
+        {{ table|safe }}
+        <br><br>
+        {% if filename %}
+        <a href="/download/{{ filename }}">Download Cleaned CSV</a>
+        {% endif %}
     {% endif %}
 </body>
 </html>
