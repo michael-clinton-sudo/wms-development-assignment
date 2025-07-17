@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Inventory Upload</title></head>
+<body>
+    <h2>Upload Excel/CSV</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload + Process">
+    </form>
+    {% if tables %}
+        <h3>Cleaned Data Preview</h3>
+        {{ tables|safe }}
+        <a href="/download/result.csv">Download Cleaned CSV</a>
+    {% endif %}
+</body>
+</html>
